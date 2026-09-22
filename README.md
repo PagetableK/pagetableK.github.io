@@ -14,6 +14,6 @@ https://drive.google.com/file/d/1CXIEM6rsItyWZp9Ln-wwcdfyTYkXZtxY/view?usp=shari
 
 Guia 2
 
-Página generada con claude: 
+Página generada con claude: https://pagetablek.github.io/Guia2/cc/index.html
 
 Video: https://drive.google.com/file/d/1OVpMjeXnxIVCHrHfL4e-D5a5EGEjP5c2/view?usp=sharing
