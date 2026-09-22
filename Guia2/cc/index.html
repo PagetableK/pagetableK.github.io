@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inicio — Centro de Conocimiento ESEN</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Estilos específicos del index */
+    .hero-wine { padding: 72px 0 0; }
+    .hero-grid { padding-bottom: 72px; }
+
+    /* Animaciones de entrada para el hero */
+    .hero-eyebrow   { animation: fadeInUp 0.5s ease 0.1s both; }
+    .hero-titulo    { animation: fadeInUp 0.6s ease 0.2s both; }
+    .hero-subtitulo { animation: fadeInUp 0.6s ease 0.3s both; }
+    .buscador-hero  { animation: fadeInUp 0.6s ease 0.4s both; }
+    .hero-mockup    { animation: fadeInUp 0.7s ease 0.35s both; }
+
+    /* Tags de recursos recientes */
+    .etiqueta-nuevo {
+      background: rgba(200,161,73,0.12);
+      color: var(--color-esen-gold);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    /* Eventos */
+    .evento-card {
+      display: flex;
+      gap: var(--s16);
+      align-items: flex-start;
+      padding: var(--s16) 0;
+      border-bottom: 1px solid var(--color-mist);
+      transition: padding-left 0.2s ease;
+    }
+    .evento-card:last-child { border-bottom: none; }
+    .evento-card:hover { padding-left: var(--s8); }
+
+    .evento-fecha-bloque {
+      flex-shrink: 0;
+      text-align: center;
+      width: 48px;
+    }
+    .evento-dia {
+      display: block;
+      font-family: var(--font-sentinel);
+      font-size: 28px;
+      font-weight: 300;
+      color: var(--color-graphite);
+      line-height: 1;
+    }
+    .evento-mes {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-coral-ember);
+    }
+    .evento-info h4 {
+      font-family: var(--font-sentinel);
+      font-size: var(--text-body-sm);
+      font-weight: 400;
+      color: var(--color-graphite);
+      margin-bottom: 4px;
+    }
+    .evento-info p {
+      font-size: 14px;
+      color: var(--color-fog-gray);
+    }
+
+    /* Grid noticias + eventos */
+    .grid-noticias-eventos {
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      gap: var(--s64);
+    }
+    @media (max-width: 960px) {
+      .grid-noticias-eventos { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVEGACIÓN ===== -->
+  <nav class="nav-principal" aria-label="Navegación principal">
+    <div class="contenedor nav-inner">
+      <a href="index.html" class="nav-marca">
+        <!-- Logo SVG inline -->
+        <svg class="nav-logo-svg" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect width="40" height="40" rx="4" fill="#c8a149"/>
+          <path d="M8 12h24M8 18h16M8 24h20M8 30h12" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="30" cy="27" r="6" fill="#42022e" stroke="#c8a149" stroke-width="1.5"/>
+          <path d="M28 27l1.5 1.5L33 25" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="nav-marca-nombre">
+          Centro de Conocimiento
+          <span>ESEN · El Salvador</span>
+        </span>
+      </a>
+
+      <div class="nav-enlaces" role="list">
+        <a href="index.html" class="activo" aria-current="page">Inicio</a>
+        <a href="servicios.html">Servicios</a>
+        <a href="contacto.html">Contacto</a>
+        <a href="contacto.html" class="btn-ghost-blanco" style="margin-left:8px;">Reservar sala →</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ===== HERO WINE ===== -->
+    <section class="hero-wine" aria-label="Bienvenida">
+      <div class="contenedor">
+        <div class="hero-grid">
+
+          <!-- Texto + Buscador -->
+          <div class="hero-texto">
+            <p class="hero-eyebrow">
+              <span class="hero-eyebrow-dot" aria-hidden="true"></span>
+              Escuela Superior de Economía y Negocios
+            </p>
+            <h1 class="hero-titulo">
+              Un espacio para aprender, investigar y descubrir.
+            </h1>
+            <p class="hero-subtitulo">
+              Accede a más de 25,000 recursos académicos físicos y digitales,
+              bases de datos internacionales y espacios de estudio colaborativo.
+            </p>
+
+            <!-- Buscador -->
+            <div class="buscador-hero">
+              <h2>¿Qué estás buscando?</h2>
+              <form class="buscador-form" action="#" method="get" role="search">
+                <label for="busqueda-principal" class="sr-only">Buscar en el catálogo</label>
+                <input
+                  id="busqueda-principal"
+                  class="buscador-input"
+                  type="search"
+                  name="q"
+                  placeholder="Libros, artículos, revistas…"
+                  autocomplete="off"
+                >
+                <button type="submit" class="btn-buscar">Buscar</button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Mockup editorial -->
+          <div class="hero-mockup" aria-hidden="true">
+            <div class="mockup-card">
+              <div class="mockup-dots">
+                <span></span><span></span><span></span>
+              </div>
+              <div class="mockup-titulo-bar"></div>
+              <div class="mockup-linea larga"></div>
+              <div class="mockup-linea media"></div>
+              <div class="mockup-linea acento-coral"></div>
+              <div class="mockup-linea larga"></div>
+              <div class="mockup-linea corta"></div>
+              <div class="mockup-linea acento-teal"></div>
+              <div class="mockup-linea media"></div>
+              <div class="mockup-linea larga"></div>
+              <div class="mockup-linea acento-gold"></div>
+              <div class="mockup-linea corta"></div>
+              <div class="deco-circulo-gold"></div>
+            </div>
+          </div>
+
+        </div><!-- /hero-grid -->
+      </div>
+
+      <!-- Strip de estadísticas -->
+      <div class="strip-stats">
+        <div class="contenedor">
+          <div class="strip-stats-grid">
+            <div>
+              <span class="stat-item-num">25,000+</span>
+              <span class="stat-item-label">Títulos físicos</span>
+            </div>
+            <div>
+              <span class="stat-item-num">6</span>
+              <span class="stat-item-label">Bases de datos</span>
+            </div>
+            <div>
+              <span class="stat-item-num">12</span>
+              <span class="stat-item-label">Salas de estudio</span>
+            </div>
+            <div>
+              <span class="stat-item-num">100%</span>
+              <span class="stat-item-label">Acceso digital</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ACCESOS RÁPIDOS ===== -->
+    <section class="seccion-blanca" aria-labelledby="accesos-titulo">
+      <div class="contenedor">
+        <span class="eyebrow" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="6" height="6" rx="1"/><rect x="10" y="2" width="6" height="6" rx="1"/><rect x="2" y="10" width="6" height="6" rx="1"/><rect x="10" y="10" width="6" height="6" rx="1"/></svg>
+          Accesos Rápidos
+        </span>
+        <h2 id="accesos-titulo" class="titulo-seccion">Todo lo que necesitas,<br>en un solo lugar.</h2>
+        <span class="linea-decorativa" aria-hidden="true"></span>
+
+        <div class="grid-accesos">
+
+          <article class="tarjeta-acceso animar-entrada">
+            <svg class="tarjeta-acceso-icono" viewBox="0 0 40 40" fill="none" stroke="var(--color-slate-ink)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M8 34V10a2 2 0 012-2h20a2 2 0 012 2v24"/>
+              <path d="M4 34h32"/><path d="M14 14h12M14 20h8"/>
+            </svg>
+            <h3>Catálogo en Línea</h3>
+            <p>Consulta la disponibilidad de libros, tesis y materiales físicos de la colección general.</p>
+            <a href="#" class="enlace-coral">Explorar catálogo</a>
+          </article>
+
+          <article class="tarjeta-acceso animar-entrada">
+            <svg class="tarjeta-acceso-icono" viewBox="0 0 40 40" fill="none" stroke="var(--color-slate-ink)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="20" cy="20" r="14"/><path d="M20 6v14l8 4"/>
+            </svg>
+            <h3>Bases de Datos</h3>
+            <p>Accede a EBSCOhost, Tirant Prime, O'Reilly, IMF eLibrary y más desde campus o remoto.</p>
+            <a href="#digital" class="enlace-coral">Ver recursos</a>
+          </article>
+
+          <article class="tarjeta-acceso animar-entrada">
+            <svg class="tarjeta-acceso-icono" viewBox="0 0 40 40" fill="none" stroke="var(--color-slate-ink)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="6" y="6" width="28" height="28" rx="2"/>
+              <path d="M6 14h28M14 14v20"/>
+            </svg>
+            <h3>Repositorio ESEN (RAC)</h3>
+            <p>Descarga tesis, artículos y publicaciones académicas de nuestra comunidad universitaria.</p>
+            <a href="#" class="enlace-coral">Ir al repositorio</a>
+          </article>
+
+          <article class="tarjeta-acceso animar-entrada">
+            <svg class="tarjeta-acceso-icono" viewBox="0 0 40 40" fill="none" stroke="var(--color-slate-ink)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="4" y="10" width="32" height="22" rx="2"/>
+              <path d="M12 10V8a2 2 0 014 0v2M24 10V8a2 2 0 014 0v2"/>
+            </svg>
+            <h3>Reserva de Cubículos</h3>
+            <p>Reserva salas de estudio individual o grupal con disponibilidad en tiempo real.</p>
+            <a href="contacto.html" class="enlace-coral">Reservar espacio</a>
+          </article>
+
+          <article class="tarjeta-acceso animar-entrada">
+            <svg class="tarjeta-acceso-icono" viewBox="0 0 40 40" fill="none" stroke="var(--color-slate-ink)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M10 34V14l10-8 10 8v20"/><path d="M16 34v-10h8v10"/>
+            </svg>
+            <h3>Guías Temáticas</h3>
+            <p>Recursos seleccionados por área: Derecho, Economía, Finanzas, Administración y más.</p>
+            <a href="servicios.html" class="enlace-coral">Ver guías</a>
+          </article>
+
+          <article class="tarjeta-acceso animar-entrada">
+            <svg class="tarjeta-acceso-icono" viewBox="0 0 40 40" fill="none" stroke="var(--color-slate-ink)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="20" cy="16" r="6"/>
+              <path d="M8 34c0-6.627 5.373-12 12-12s12 5.373 12 12"/>
+            </svg>
+            <h3>Acceso Alumni</h3>
+            <p>Graduados ESEN pueden mantener acceso a recursos digitales y servicios de asesoría.</p>
+            <a href="#" class="enlace-coral">Información Alumni</a>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== RECURSOS DIGITALES ===== -->
+    <section class="seccion-papel" id="digital" aria-labelledby="digital-titulo">
+      <div class="contenedor">
+        <span class="eyebrow" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="7"/><path d="M9 2a7 7 0 017 7"/></svg>
+          E-Recursos
+        </span>
+        <h2 id="digital-titulo" class="titulo-seccion">Explora nuestros recursos digitales.</h2>
+
+        <div class="grid-recursos">
+
+          <article class="tarjeta-recurso animar-entrada">
+            <div class="recurso-placeholder-logo">Tirant</div>
+            <h3>Tirant Prime</h3>
+            <p>Plataforma jurídica integral con legislación, jurisprudencia y doctrina iberoamericana.</p>
+            <a href="#" class="btn-secundario">Acceder</a>
+          </article>
+
+          <article class="tarjeta-recurso animar-entrada">
+            <div class="recurso-placeholder-logo">O'Reilly</div>
+            <h3>O'Reilly Learning</h3>
+            <p>Libros, videos y rutas de aprendizaje en tecnología, negocios y habilidades digitales.</p>
+            <a href="#" class="btn-secundario">Acceder</a>
+          </article>
+
+          <article class="tarjeta-recurso animar-entrada">
+            <div class="recurso-placeholder-logo">EBSCO</div>
+            <h3>EBSCOhost</h3>
+            <p>Colección multidisciplinaria de revistas académicas, artículos y reportes de investigación.</p>
+            <a href="#" class="btn-secundario">Acceder</a>
+          </article>
+
+          <article class="tarjeta-recurso animar-entrada">
+            <div class="recurso-placeholder-logo">RAC</div>
+            <h3>RAC ESEN</h3>
+            <p>Repositorio Académico y Científico de ESEN: tesis, artículos y documentos institucionales.</p>
+            <a href="#" class="btn-secundario">Acceder</a>
+          </article>
+
+          <article class="tarjeta-recurso animar-entrada">
+            <div class="recurso-placeholder-logo">IMF</div>
+            <h3>IMF eLibrary</h3>
+            <p>Publicaciones, datos estadísticos e investigaciones del Fondo Monetario Internacional.</p>
+            <a href="#" class="btn-secundario">Acceder</a>
+          </article>
+
+          <article class="tarjeta-recurso animar-entrada">
+            <div class="recurso-placeholder-logo">Banco Mundial</div>
+            <h3>Banco Mundial</h3>
+            <p>Datos, indicadores económicos e investigaciones de desarrollo global actualizados.</p>
+            <a href="#" class="btn-secundario">Acceder</a>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CATEGORÍAS ===== -->
+    <section class="seccion-blanca" aria-labelledby="categorias-titulo" id="recursos">
+      <div class="contenedor">
+        <h2 id="categorias-titulo" class="titulo-seccion">Bases de datos y recursos electrónicos.</h2>
+        <div class="grid-categorias">
+          <div class="categoria-item animar-entrada">
+            <h3>Bases de datos</h3>
+            <p>Fuentes de información especializada para investigación académica.</p>
+          </div>
+          <div class="categoria-item animar-entrada">
+            <h3>Revistas</h3>
+            <p>Artículos arbitrados y publicaciones periódicas internacionales.</p>
+          </div>
+          <div class="categoria-item animar-entrada">
+            <h3>E-books</h3>
+            <p>Libros electrónicos en economía, derecho, administración y más.</p>
+          </div>
+          <div class="categoria-item animar-entrada">
+            <h3>Investigación</h3>
+            <p>Herramientas y guías metodológicas para proyectos de grado.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== NOVEDADES Y EVENTOS ===== -->
+    <section class="seccion-papel" aria-labelledby="novedades-titulo">
+      <div class="contenedor">
+        <div class="grid-noticias-eventos">
+
+          <!-- Novedades -->
+          <div>
+            <span class="eyebrow" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h12a1 1 0 011 1v8a1 1 0 01-1 1H6l-3 3V4a1 1 0 011-1z"/></svg>
+              Contenido reciente
+            </span>
+            <h2 id="novedades-titulo" class="titulo-seccion">Novedades del CC.</h2>
+
+            <div class="grid-novedades">
+
+              <article class="tarjeta-novedad">
+                <div class="novedad-img-placeholder" aria-hidden="true">Imagen noticia</div>
+                <div class="novedad-cuerpo">
+                  <span class="etiqueta-badge">Nuevas Adquisiciones</span>
+                  <h3>Nuevos títulos de Economía Conductual 2026</h3>
+                  <p class="novedad-fecha">15 de septiembre, 2026</p>
+                  <p>Incorporamos 40 nuevos títulos especializados en economía del comportamiento y finanzas corporativas.</p>
+                  <a href="#" class="enlace-coral">Leer más</a>
+                </div>
+              </article>
+
+              <article class="tarjeta-novedad">
+                <div class="novedad-img-placeholder" aria-hidden="true">Imagen noticia</div>
+                <div class="novedad-cuerpo">
+                  <span class="etiqueta-badge">Tutorial</span>
+                  <h3>Guía de uso para Tirant Prime</h3>
+                  <p class="novedad-fecha">02 de septiembre, 2026</p>
+                  <p>Aprende a buscar jurisprudencia, legislación centroamericana y doctrina de manera efectiva.</p>
+                  <a href="#" class="enlace-coral">Leer más</a>
+                </div>
+              </article>
+
+            </div>
+          </div>
+
+          <!-- Eventos -->
+          <div>
+            <span class="eyebrow" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="14" height="13" rx="1"/><path d="M6 1v4M12 1v4M2 8h14"/></svg>
+              Agenda
+            </span>
+            <h2 class="titulo-seccion">Próximos eventos.</h2>
+
+            <div>
+              <div class="evento-card">
+                <div class="evento-fecha-bloque">
+                  <span class="evento-dia">20</span>
+                  <span class="evento-mes">SEP</span>
+                </div>
+                <div class="evento-info">
+                  <h4>Taller de citación APA 7.ª edición</h4>
+                  <p>Cita correctamente tus trabajos de investigación. Modalidad presencial.</p>
+                </div>
+              </div>
+
+              <div class="evento-card">
+                <div class="evento-fecha-bloque">
+                  <span class="evento-dia">28</span>
+                  <span class="evento-mes">SEP</span>
+                </div>
+                <div class="evento-info">
+                  <h4>Introducción a O'Reilly Learning</h4>
+                  <p>Webinar de 45 minutos. Registro previo requerido.</p>
+                </div>
+              </div>
+
+              <div class="evento-card">
+                <div class="evento-fecha-bloque">
+                  <span class="evento-dia">10</span>
+                  <span class="evento-mes">OCT</span>
+                </div>
+                <div class="evento-info">
+                  <h4>Semana de la Investigación ESEN</h4>
+                  <p>Talleres, conferencias y acceso extendido a bases de datos.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SECCIÓN INSTITUCIONAL WINE ===== -->
+    <section class="institucional-wine" aria-labelledby="institucional-titulo">
+      <div class="contenedor institucional-grid">
+
+        <div class="institucional-texto">
+          <span class="eyebrow" style="color: rgba(255,255,255,0.5);">
+            Sobre nosotros
+          </span>
+          <h2 id="institucional-titulo">
+            Conocimiento que impulsa nuevas ideas.
+          </h2>
+          <p>El Centro de Conocimiento ESEN es el núcleo de la investigación y el aprendizaje en nuestra institución. Ofrecemos un entorno moderno, recursos de clase mundial y un equipo comprometido con tu desarrollo profesional y personal.</p>
+          <a href="servicios.html" class="btn-ghost-blanco">Conocer nuestros servicios →</a>
+        </div>
+
+        <!-- Card editorial de datos -->
+        <div class="institucional-mockup" aria-hidden="true">
+          <div class="editorial-card">
+            <p class="editorial-card-titulo">Colección ESEN, 2026</p>
+            <div class="editorial-datos">
+              <div class="editorial-dato">
+                <span class="editorial-dato-num">25K</span>
+                <span class="editorial-dato-desc">Títulos en colección<br>física general</span>
+              </div>
+              <div class="editorial-dato">
+                <span class="editorial-dato-num">6</span>
+                <span class="editorial-dato-desc">Plataformas digitales<br>de acceso continuo</span>
+              </div>
+              <div class="editorial-dato">
+                <span class="editorial-dato-num">12</span>
+                <span class="editorial-dato-desc">Salas de estudio<br>individual y grupal</span>
+              </div>
+            </div>
+            <div class="deco-circulo-gold"></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer-principal" aria-label="Pie de página institucional">
+    <div class="contenedor">
+      <div class="footer-grid">
+
+        <div class="footer-col-marca">
+          <p class="footer-marca-nombre">Centro de Conocimiento ESEN</p>
+          <p>Km. 12½ carretera al Puerto de La Libertad,<br>calle nueva a Comasagua, Santa Tecla,<br>La Libertad, El Salvador.</p>
+          <p>Tel. 2234-9243</p>
+          <p>centroconocimiento@esen.edu.sv</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Centro de Conocimiento</h4>
+          <ul>
+            <li><a href="#">Acerca del CC</a></li>
+            <li><a href="#">Catálogo</a></li>
+            <li><a href="#">E-Recursos</a></li>
+            <li><a href="servicios.html">Servicios</a></li>
+            <li><a href="#">Salas colectivas</a></li>
+            <li><a href="#">Guías temáticas</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Recursos digitales</h4>
+          <ul>
+            <li><a href="#">Bases de datos</a></li>
+            <li><a href="#">E-books</a></li>
+            <li><a href="#">Revistas</a></li>
+            <li><a href="#">Investigación</a></li>
+            <li><a href="#">RAC ESEN</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>ESEN</h4>
+          <ul>
+            <li><a href="#">Sitio institucional</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+            <li><a href="#">Alumni</a></li>
+            <li><a href="#">Intranet</a></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="footer-inferior">
+      <p>&copy; 2026 Escuela Superior de Economía y Negocios — Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

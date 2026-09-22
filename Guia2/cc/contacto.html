@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto — Centro de Conocimiento ESEN</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* ===== ESTILOS ESPECÍFICOS DE CONTACTO ===== */
+
+    /* Animaciones de entrada en hero */
+    .hero-contacto .hero-eyebrow { animation: fadeInUp 0.5s ease 0.1s both; }
+    .hero-contacto h1            { animation: fadeInUp 0.6s ease 0.2s both; }
+    .hero-contacto p             { animation: fadeInUp 0.6s ease 0.3s both; }
+
+    /* Título de formulario */
+    .form-seccion-titulo {
+      font-family: var(--font-sentinel);
+      font-size: var(--text-heading-sm);
+      font-weight: 300;
+      color: var(--color-graphite);
+      letter-spacing: -0.3px;
+      margin-bottom: var(--s8);
+    }
+
+    .form-seccion-subtitulo {
+      font-size: var(--text-body-sm);
+      color: var(--color-fog-gray);
+      margin-bottom: var(--s32);
+    }
+
+    /* Mapa placeholder */
+    .mapa-placeholder {
+      width: 100%;
+      height: 200px;
+      background: linear-gradient(135deg, #f0ede8 0%, #e8e4de 100%);
+      border-radius: var(--radius);
+      border: 1px solid var(--color-mist);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--s8);
+      color: var(--color-fog-gray);
+      font-size: 14px;
+      margin-top: var(--s16);
+    }
+
+    .mapa-placeholder svg {
+      width: 32px; height: 32px;
+      stroke: var(--color-fog-gray);
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+    }
+
+    /* Feedback visual de envío (CSS puro) */
+    .btn-enviar:focus-within ~ .form-feedback,
+    .formulario-contacto:focus-within .form-feedback {
+      opacity: 1;
+    }
+
+    /* Estado visual del campo inválido */
+    .campo-input:invalid:not(:placeholder-shown) {
+      border-color: var(--color-coral-ember);
+    }
+
+    .campo-textarea:invalid:not(:placeholder-shown) {
+      border-color: var(--color-coral-ember);
+    }
+
+    /* Nota de privacidad */
+    .nota-privacidad {
+      font-size: var(--text-caption);
+      color: var(--color-fog-gray);
+      margin-top: var(--s16);
+      line-height: 1.5;
+      display: flex;
+      gap: var(--s8);
+      align-items: flex-start;
+    }
+
+    .nota-privacidad svg {
+      width: 14px; height: 14px;
+      stroke: var(--color-fog-gray);
+      fill: none;
+      stroke-width: 1.5;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* Sección FAQ */
+    .faq-lista {
+      display: flex;
+      flex-direction: column;
+      gap: var(--s16);
+    }
+
+    .faq-item {
+      border: 1px solid var(--color-mist);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: border-color 0.2s ease;
+    }
+
+    .faq-item:hover { border-color: var(--color-slate-ink); }
+
+    /* Acordeón CSS puro usando :focus-within */
+    .faq-pregunta {
+      display: block;
+      width: 100%;
+      padding: var(--s16) var(--s24);
+      font-size: var(--text-body-sm);
+      font-weight: 500;
+      color: var(--color-graphite);
+      background: none;
+      border: none;
+      text-align: left;
+      cursor: pointer;
+      font-family: var(--font-whitney);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faq-pregunta::after {
+      content: '+';
+      font-size: 20px;
+      color: var(--color-coral-ember);
+      transition: transform 0.2s ease;
+    }
+
+    .faq-respuesta {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+      font-size: var(--text-body-sm);
+      color: var(--color-slate-ink);
+      padding: 0 var(--s24);
+      line-height: 1.6;
+    }
+
+    /* Activación del acordeón con :focus-within */
+    .faq-item:focus-within .faq-respuesta {
+      max-height: 200px;
+      padding: var(--s8) var(--s24) var(--s24);
+    }
+
+    .faq-item:focus-within .faq-pregunta::after {
+      transform: rotate(45deg);
+    }
+
+    /* Grid de FAQ */
+    .contacto-faq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--s32);
+      align-items: start;
+    }
+
+    @media (max-width: 960px) {
+      .contacto-faq-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Enlace de correo destacado */
+    .correo-destacado {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--s8);
+      font-size: var(--text-body-sm);
+      font-weight: 500;
+      color: var(--color-midnight-wine);
+      border-bottom: 1px solid var(--color-mist);
+      padding-bottom: 2px;
+      transition: border-color 0.2s ease, color 0.2s ease;
+    }
+
+    .correo-destacado:hover {
+      color: var(--color-coral-ember);
+      border-color: var(--color-coral-ember);
+    }
+
+    /* Indicador de estado de campo */
+    .campo-check {
+      position: relative;
+    }
+
+    .campo-check .campo-input:valid:not(:placeholder-shown) + .check-icon {
+      opacity: 1;
+    }
+
+    .check-icon {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      pointer-events: none;
+    }
+
+    .check-icon svg {
+      width: 16px; height: 16px;
+      stroke: #28c840;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .campo-grupo.campo-check { position: relative; }
+    .campo-grupo.campo-check .campo-input { padding-right: 40px; }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVEGACIÓN ===== -->
+  <nav class="nav-principal" aria-label="Navegación principal">
+    <div class="contenedor nav-inner">
+      <a href="index.html" class="nav-marca">
+        <svg class="nav-logo-svg" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect width="40" height="40" rx="4" fill="#c8a149"/>
+          <path d="M8 12h24M8 18h16M8 24h20M8 30h12" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="30" cy="27" r="6" fill="#42022e" stroke="#c8a149" stroke-width="1.5"/>
+          <path d="M28 27l1.5 1.5L33 25" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="nav-marca-nombre">
+          Centro de Conocimiento
+          <span>ESEN · El Salvador</span>
+        </span>
+      </a>
+
+      <div class="nav-enlaces" role="list">
+        <a href="index.html">Inicio</a>
+        <a href="servicios.html">Servicios</a>
+        <a href="contacto.html" class="activo" aria-current="page">Contacto</a>
+        <a href="contacto.html#formulario" class="btn-ghost-blanco" style="margin-left:8px;">Reservar sala →</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ===== HERO CONTACTO ===== -->
+    <section class="hero-contacto" aria-label="Encabezado contacto">
+      <div class="contenedor" style="position:relative; z-index:1;">
+        <p class="hero-eyebrow" style="color: var(--color-esen-gold); font-size:12px; font-weight:600; letter-spacing:0.167em; text-transform:uppercase; margin-bottom:var(--s16);">
+          <span class="hero-eyebrow-dot" aria-hidden="true"></span>
+          Centro de Conocimiento ESEN
+        </p>
+        <h1>Contacto y Ubicación</h1>
+        <p>Estamos aquí para apoyarte. Escríbenos, llámanos o visítanos<br>en nuestras instalaciones en Santa Tecla, El Salvador.</p>
+      </div>
+    </section>
+
+    <!-- ===== FORMULARIO + SIDEBAR ===== -->
+    <section class="seccion-blanca" id="formulario" aria-labelledby="formulario-titulo">
+      <div class="contenedor">
+        <div class="contacto-grid">
+
+          <!-- Formulario principal -->
+          <div>
+            <h2 id="formulario-titulo" class="form-seccion-titulo">Envíanos un mensaje</h2>
+            <p class="form-seccion-subtitulo">Respondemos en un plazo de 1 a 2 días hábiles. Para urgencias, comunícate por teléfono.</p>
+            <span class="linea-decorativa" aria-hidden="true"></span>
+
+            <form class="formulario-contacto" action="#" method="post" novalidate aria-label="Formulario de contacto académico">
+
+              <div class="campos-fila">
+                <!-- Nombre -->
+                <div class="campo-grupo campo-check">
+                  <label for="nombre">Nombre completo <span aria-hidden="true" style="color:var(--color-coral-ember);">*</span></label>
+                  <input
+                    id="nombre"
+                    class="campo-input"
+                    type="text"
+                    name="nombre"
+                    placeholder="Tu nombre completo"
+                    required
+                    autocomplete="name"
+                  >
+                  <span class="check-icon" aria-hidden="true">
+                    <svg viewBox="0 0 16 16"><path d="M3 8l3.5 3.5L13 4"/></svg>
+                  </span>
+                </div>
+
+                <!-- Tipo de usuario -->
+                <div class="campo-grupo">
+                  <label for="tipo-usuario">Tipo de usuario <span aria-hidden="true" style="color:var(--color-coral-ember);">*</span></label>
+                  <select id="tipo-usuario" class="campo-select" name="tipo_usuario" required>
+                    <option value="" disabled selected>Selecciona tu rol…</option>
+                    <option value="estudiante-pregrado">Estudiante de pregrado</option>
+                    <option value="estudiante-posgrado">Estudiante de posgrado</option>
+                    <option value="docente">Docente</option>
+                    <option value="administrativo">Personal administrativo</option>
+                    <option value="alumni">Alumni ESEN</option>
+                    <option value="externo">Externo / Visitante</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Correo institucional -->
+              <div class="campo-grupo campo-check">
+                <label for="correo">Correo institucional <span aria-hidden="true" style="color:var(--color-coral-ember);">*</span></label>
+                <input
+                  id="correo"
+                  class="campo-input"
+                  type="email"
+                  name="correo"
+                  placeholder="usuario@esen.edu.sv"
+                  required
+                  autocomplete="email"
+                >
+                <span class="check-icon" aria-hidden="true">
+                  <svg viewBox="0 0 16 16"><path d="M3 8l3.5 3.5L13 4"/></svg>
+                </span>
+              </div>
+
+              <!-- Asunto -->
+              <div class="campo-grupo">
+                <label for="asunto">Asunto <span aria-hidden="true" style="color:var(--color-coral-ember);">*</span></label>
+                <select id="asunto" class="campo-select" name="asunto" required>
+                  <option value="" disabled selected>¿En qué podemos ayudarte?</option>
+                  <optgroup label="Préstamo y colecciones">
+                    <option value="prestamo">Préstamo y devolución de materiales</option>
+                    <option value="renovacion">Renovación de préstamo</option>
+                    <option value="adquisicion">Sugerencia de adquisición</option>
+                  </optgroup>
+                  <optgroup label="Recursos digitales">
+                    <option value="acceso-digital">Acceso a bases de datos</option>
+                    <option value="vpn">Configuración de acceso remoto (VPN)</option>
+                  </optgroup>
+                  <optgroup label="Espacios y servicios">
+                    <option value="cubiculos">Reserva de sala de estudio</option>
+                    <option value="apa">Asesoría en citación APA</option>
+                    <option value="investigacion">Apoyo a la investigación</option>
+                  </optgroup>
+                  <optgroup label="Otros">
+                    <option value="taller">Inscripción a taller</option>
+                    <option value="otro">Otro asunto</option>
+                  </optgroup>
+                </select>
+              </div>
+
+              <!-- Mensaje -->
+              <div class="campo-grupo">
+                <label for="mensaje">Mensaje <span aria-hidden="true" style="color:var(--color-coral-ember);">*</span></label>
+                <textarea
+                  id="mensaje"
+                  class="campo-textarea"
+                  name="mensaje"
+                  placeholder="Describe tu consulta con el mayor detalle posible para que podamos asistirte mejor…"
+                  required
+                  minlength="20"
+                  rows="6"
+                ></textarea>
+              </div>
+
+              <div>
+                <button type="submit" class="btn-enviar">Enviar mensaje</button>
+                <p class="nota-privacidad">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="7" width="10" height="7" rx="1"/><path d="M5 7V5a3 3 0 016 0v2"/></svg>
+                  Tu información es confidencial y se utiliza únicamente para gestionar tu solicitud, conforme a la política de privacidad de ESEN.
+                </p>
+              </div>
+
+            </form>
+          </div>
+
+          <!-- Sidebar de información -->
+          <aside class="info-sidebar" aria-label="Información de contacto y horarios">
+
+            <!-- Horarios -->
+            <div class="info-bloque">
+              <h3 class="info-bloque-titulo">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                Horarios de atención
+              </h3>
+              <div class="horario-fila">
+                <span>Lun — Jue</span>
+                <span>7:00 AM – 8:00 PM</span>
+              </div>
+              <div class="horario-fila">
+                <span>Viernes</span>
+                <span>7:00 AM – 6:00 PM</span>
+              </div>
+              <div class="horario-fila">
+                <span>Sábado</span>
+                <span>8:00 AM – 12:00 PM</span>
+              </div>
+              <div class="horario-fila">
+                <span>Dom y festivos</span>
+                <span>Cerrado</span>
+              </div>
+              <div class="horario-fila" style="margin-top:var(--s8);">
+                <span>Recursos digitales</span>
+                <span style="color:var(--color-coral-ember); font-weight:600;">24 / 7</span>
+              </div>
+            </div>
+
+            <!-- Ubicación -->
+            <div class="info-bloque">
+              <h3 class="info-bloque-titulo">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-7.55-8-13a8 8 0 1116 0c0 5.45-8 13-8 13z"/><circle cx="12" cy="8" r="3"/></svg>
+                Ubicación
+              </h3>
+              <p class="info-detalle">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 14s-6-5.5-6-9a6 6 0 1112 0c0 3.5-6 9-6 9z"/><circle cx="8" cy="5" r="2"/></svg>
+                Km. 12½ carretera al Puerto de La Libertad, calle nueva a Comasagua, Santa Tecla, La Libertad, El Salvador.
+              </p>
+              <div class="mapa-placeholder" role="img" aria-label="Mapa de ubicación del Centro de Conocimiento ESEN">
+                <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 28s-10-9.2-10-15a10 10 0 0120 0c0 5.8-10 15-10 15z"/><circle cx="16" cy="13" r="3"/></svg>
+                <span>Mapa de ubicación</span>
+                <span style="font-size:11px; letter-spacing:0.1em; text-transform:uppercase;">Campus ESEN — Santa Tecla</span>
+              </div>
+            </div>
+
+            <!-- Contacto directo -->
+            <div class="info-bloque">
+              <h3 class="info-bloque-titulo">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+                Contacto directo
+              </h3>
+              <p class="info-detalle">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M14 10.6v2a1.3 1.3 0 01-1.42 1.3 12.9 12.9 0 01-5.63-2 12.7 12.7 0 01-3.91-3.9A12.9 12.9 0 011 2.45 1.3 1.3 0 012.3 1h2a1.3 1.3 0 011.3 1.12c.083.626.235 1.24.456 1.832a1.3 1.3 0 01-.293 1.375l-.847.846a10.4 10.4 0 003.906 3.906l.846-.847a1.3 1.3 0 011.375-.292c.592.22 1.206.372 1.832.455A1.3 1.3 0 0114 10.6z"/></svg>
+                Tel. (503) 2234-9243
+              </p>
+              <p class="info-detalle">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1" y="3" width="14" height="10" rx="1"/><path d="M1 4l7 5 7-5"/></svg>
+                <a href="mailto:centroconocimiento@esen.edu.sv" class="correo-destacado">
+                  centroconocimiento@esen.edu.sv
+                </a>
+              </p>
+              <p class="info-detalle" style="margin-top:var(--s8);">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M8 4v5l3 1.5"/></svg>
+                Para soporte técnico de acceso a bases de datos, escribe a:
+              </p>
+              <a href="mailto:soporte.biblioteca@esen.edu.sv" class="correo-destacado" style="margin-left:24px;">
+                soporte.biblioteca@esen.edu.sv
+              </a>
+            </div>
+
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FAQ ACORDEÓN CSS PURO ===== -->
+    <section class="seccion-papel" aria-labelledby="faq-titulo">
+      <div class="contenedor">
+        <div class="contacto-faq-grid">
+
+          <div>
+            <span class="eyebrow" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="7"/><path d="M9 12V9M9 6h.01"/></svg>
+              Preguntas frecuentes
+            </span>
+            <h2 id="faq-titulo" class="titulo-seccion" style="text-align:left;">Respuestas rápidas.</h2>
+            <p style="color:var(--color-slate-ink); font-size:var(--text-body-sm); margin-bottom:var(--s32);">
+              Haz clic en cada pregunta para ver la respuesta. Si no encuentras lo que buscas, escríbenos directamente.
+            </p>
+            <a href="#formulario" class="btn-primario">Enviar consulta</a>
+          </div>
+
+          <div class="faq-lista" role="list">
+
+            <div class="faq-item" role="listitem">
+              <button class="faq-pregunta" type="button" aria-expanded="false">
+                ¿Cómo accedo a las bases de datos desde casa?
+              </button>
+              <div class="faq-respuesta">
+                Para acceder de forma remota, necesitas configurar la VPN institucional de ESEN. Descarga el cliente VPN desde la intranet o solicita el manual de configuración a soporte.biblioteca@esen.edu.sv.
+              </div>
+            </div>
+
+            <div class="faq-item" role="listitem">
+              <button class="faq-pregunta" type="button" aria-expanded="false">
+                ¿Cuántos libros puedo llevar en préstamo?
+              </button>
+              <div class="faq-respuesta">
+                Los estudiantes de pregrado pueden llevar hasta 3 libros por 7 días calendario. Los docentes tienen un límite de 5 libros por 30 días. Las renovaciones se gestionan en línea hasta 2 veces.
+              </div>
+            </div>
+
+            <div class="faq-item" role="listitem">
+              <button class="faq-pregunta" type="button" aria-expanded="false">
+                ¿Cómo reservo una sala de estudio grupal?
+              </button>
+              <div class="faq-respuesta">
+                Las reservas se realizan en el mostrador del Centro de Conocimiento con al menos 24 horas de anticipación, o mediante el formulario de contacto seleccionando "Reserva de sala de estudio". Especifica fecha, hora y número de integrantes.
+              </div>
+            </div>
+
+            <div class="faq-item" role="listitem">
+              <button class="faq-pregunta" type="button" aria-expanded="false">
+                ¿Los Alumni de ESEN tienen acceso a los recursos?
+              </button>
+              <div class="faq-respuesta">
+                Sí. Los graduados ESEN mantienen acceso a determinados recursos digitales y pueden solicitar carné de alumni para préstamo en sala. Contáctanos para conocer los términos específicos según tu año de graduación.
+              </div>
+            </div>
+
+            <div class="faq-item" role="listitem">
+              <button class="faq-pregunta" type="button" aria-expanded="false">
+                ¿Ofrecen asesoría para tesis de grado?
+              </button>
+              <div class="faq-respuesta">
+                Sí. El equipo de bibliotecaría de referencia ofrece asesorías personalizadas en búsqueda de fuentes, estrategias de investigación, citación APA 7.ª edición y uso de gestores bibliográficos como Mendeley y Zotero. Agenda tu cita por este formulario.
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FRANJA CTA WINE ===== -->
+    <section class="institucional-wine" aria-label="Llamada a acción">
+      <div class="contenedor" style="text-align:center; max-width:640px;">
+        <span class="eyebrow" style="color:rgba(255,255,255,0.5); justify-content:center;">
+          ¿Necesitas ayuda inmediata?
+        </span>
+        <h2 style="font-family:var(--font-sentinel); font-size:clamp(28px,5vw,42px); font-weight:300; color:var(--color-paper-white); letter-spacing:-0.8px; line-height:1.2; margin-bottom:var(--s16);">
+          El equipo del CC está listo para apoyarte.
+        </h2>
+        <p style="color:rgba(255,255,255,0.65); font-size:var(--text-body); margin-bottom:var(--s32);">
+          Visítanos en mostrador, llámanos al <strong style="color:white;">2234-9243</strong> o escríbenos a<br>
+          <a href="mailto:centroconocimiento@esen.edu.sv" class="correo-destacado" style="color:var(--color-esen-gold); border-bottom-color:rgba(200,161,73,0.4);">centroconocimiento@esen.edu.sv</a>
+        </p>
+        <div style="display:flex; gap:var(--s16); justify-content:center; flex-wrap:wrap;">
+          <a href="#formulario" class="btn-primario">Enviar mensaje</a>
+          <a href="servicios.html" class="btn-ghost-blanco">Ver todos los servicios →</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer-principal" aria-label="Pie de página institucional">
+    <div class="contenedor">
+      <div class="footer-grid">
+
+        <div class="footer-col-marca">
+          <p class="footer-marca-nombre">Centro de Conocimiento ESEN</p>
+          <p>Km. 12½ carretera al Puerto de La Libertad,<br>calle nueva a Comasagua, Santa Tecla,<br>La Libertad, El Salvador.</p>
+          <p>Tel. 2234-9243</p>
+          <p>centroconocimiento@esen.edu.sv</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Centro de Conocimiento</h4>
+          <ul>
+            <li><a href="#">Acerca del CC</a></li>
+            <li><a href="index.html#recursos">Catálogo</a></li>
+            <li><a href="index.html#digital">E-Recursos</a></li>
+            <li><a href="servicios.html">Servicios</a></li>
+            <li><a href="#">Salas colectivas</a></li>
+            <li><a href="#">Guías temáticas</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Recursos digitales</h4>
+          <ul>
+            <li><a href="#">Bases de datos</a></li>
+            <li><a href="#">E-books</a></li>
+            <li><a href="#">Revistas</a></li>
+            <li><a href="#">Investigación</a></li>
+            <li><a href="#">RAC ESEN</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>ESEN</h4>
+          <ul>
+            <li><a href="#">Sitio institucional</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+            <li><a href="#">Alumni</a></li>
+            <li><a href="#">Intranet</a></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+    <div class="footer-inferior">
+      <p>&copy; 2026 Escuela Superior de Economía y Negocios — Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
