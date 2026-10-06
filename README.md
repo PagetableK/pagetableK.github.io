@@ -24,4 +24,4 @@ Guia 3
 
 Página generada con GPT: https://pagetablek.github.io/Guia3/cc/index.html
 
-Video: 
+Video: https://drive.google.com/file/d/1lCODjgYtiHopSOeHINkohU05_BVadKXO/view?usp=sharing
