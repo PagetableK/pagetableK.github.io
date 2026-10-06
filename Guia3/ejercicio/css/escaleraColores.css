@@ -1,0 +1,27 @@
+#jota_de_diamantes{
+    position: fixed;
+    left: 25px;
+    top: 95px;
+    z-index: 1;
+}
+
+#reina_de_diamantes{
+    position: fixed;
+    left: 45px;
+    top: 115px;
+    z-index: 1;
+}
+
+#rey_de_diamantes{
+    position: fixed;
+    left: 65px;
+    top: 135px;
+    z-index: 1;
+}
+
+#as_de_diamantes{
+    position: fixed;
+    left: 85px;
+    top: 155px;
+    z-index: 1;
+}
