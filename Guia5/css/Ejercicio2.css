@@ -1,0 +1,7 @@
+div.col > h1.text-center{
+    color: #3d1f12;
+}
+
+h1.text-center > span{
+    color: #2d82b7;
+}

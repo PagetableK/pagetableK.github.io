@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en" data-bs-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestor de pedido - Cafetería Papoi</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-B/GM4XqrwHnWXNOWMbloTmrYXZg10cakYGmpfsR/bbzQ6JAJI4ihuyADKLnBgrCe"
+      crossorigin="anonymous"
+    />
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-1a/pXj49ZQ1aHEmrJ+gMw1otqoVsYwlEnlD8mIfY2TV03r20Y0CN7uqx1tQogjPL"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.2/font/bootstrap-icons.min.css"
+    />
+    <link rel="stylesheet" href="../css/Ejercicio2.css" />
+  </head>
+
+  <body>
+    <div class="container-fluid m-0 p-4">
+      <div class="container-fluid bg-warning bg-gradient py-5">
+        <div class="row row-gap-6">
+          <div class="col-12 sm:col-3 d-flex justify-content-center">
+            <img
+              src="../img/coffeeminion.jpg"
+              alt="Cafetería Papoi"
+              class="img-fluid rounded"
+            />
+          </div>
+          <div class="col d-flex justify-content-center align-items-center">
+            <h1 class="text-center fg-white">
+              Bienvenido al gestor de pedidos
+              <span class="fg-primary">Papoi \ (•◡•) /!!</span>
+            </h1>
+          </div>
+        </div>
+      </div>
+      <div class="container-fluid">
+        <div
+          class="row d-flex gap-2 justify-content-center align-items-center mt-2 mb-6"
+        >
+          <div class="col-12">
+            <label for="precioMax" class="form-label">Precio Máximo</label>
+            <div class="input-group">
+              <span class="input-group-text" id="basic-addon1">$</span>
+              <input
+                type="number"
+                id="precioMax"
+                class="form-control"
+                min="0.1"
+              />
+            </div>
+          </div>
+          <div class="col-12 d-flex justify-content-center align-items-center">
+            <div class="row w-100 g-2">
+              <div class="col-12 md:col-4">
+                <button
+                  type="submit"
+                  class="btn-solid theme-primary w-100"
+                  id="btnFiltrar"
+                >
+                  <i class="bi bi-filter-circle-fill" aria-hidden="true"></i
+                  >Filtrar productos
+                </button>
+              </div>
+              <div class="col-12 md:col-4">
+                <button type="submit" id="btnMostrarTodo" class="btn-solid theme-warning w-100">
+                  <i class="bi bi-list" aria-hidden="true"></i>Mostrar todos los
+                  productos
+                </button>
+              </div>
+              <div class="col-12 md:col-4">
+                <button type="submit" id="btnLimpiarTabla" class="btn-solid theme-danger w-100">
+                  <i class="bi bi-trash-fill" aria-hidden="true"></i>Limpiar
+                  tabla
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table
+            class="table table-striped table-hover caption-top theme-default"
+          >
+            <caption class="fg-black text-bold">
+              <strong>Lista de pedidos</strong>
+            </caption>
+            <thead>
+              <tr>
+                <th>Producto</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Subtotal</th>
+              </tr>
+            </thead>
+            <tbody class="table-group-divider" id="tableBody"></tbody>
+            <tfoot>
+              <tr>
+                <td class="text-start">Total de unidades solicitadas</td>
+                <td></td>
+                <td id="totalUnidades">0</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td class="text-start">Monto total</td>
+                <td></td>
+                <td></td>
+                <td id="montoTotal">$0</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+      <div class="container-fluid bg-warning bg-gradient py-5">
+        <button
+          type="submit"
+          class="btn-solid theme-success w-100"
+          id="agregarNuevoProducto"
+        >
+          Agregar nuevo producto
+        </button>
+        <form class="d-none">
+          <div class="mb-3">
+            <label for="nombreProducto" class="form-label"
+              >Nombre del producto</label
+            >
+            <input type="text" class="form-control" id="nombreProducto" />
+          </div>
+          <div class="input-group"></div>
+          <div class="form-field mb-3">
+            <label for="precioProducto" class="form-label">Precio</label>
+            <div class="input-group">
+              <span class="input-group-text" id="basic-addon1">$</span>
+              <input
+                type="number"
+                class="form-control"
+                id="precioProducto"
+                step="0.01"
+                min="0.01"
+              />
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="cantidadProducto" class="form-label">Cantidad</label>
+            <input
+              type="number"
+              class="form-control"
+              id="cantidadProducto"
+              step="1"
+              min="1"
+            />
+          </div>
+          <button type="submit" class="btn-solid theme-primary w-100">
+            Agregar producto
+          </button>
+        </form>
+      </div>
+    </div>
+    <script src="../js/pedidos.js"></script>
+  </body>
+</html>
