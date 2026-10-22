@@ -25,3 +25,11 @@ Guia 3
 Página generada con GPT: https://pagetablek.github.io/Guia3/cc/index.html
 
 Video: https://drive.google.com/file/d/1lCODjgYtiHopSOeHINkohU05_BVadKXO/view?usp=sharing
+
+--------------------------------------------------------------------------------------------
+
+Guia 5
+
+Ejercicio 1: https://pagetablek.github.io/Guia5/index.html
+
+Ejercicio 2: https://pagetablek.github.io/Guia5/pages/Ejercicio2.html
